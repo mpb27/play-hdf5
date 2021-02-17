@@ -5,3 +5,5 @@ RUN sudo apt-get update && \
     sudo rm -rf /var/lib/apt/lists/*
 
 RUN pip install h5py pytest numpy
+
+RUN brew install conan
