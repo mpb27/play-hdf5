@@ -1,5 +1,4 @@
-#include <iostream>
-#include <string>
+#include <vector>
 #include <h5pp/h5pp.h>
 
 struct ParticleV0 {
@@ -27,8 +26,6 @@ void create_v1_file() {
     std::vector<ParticleV1> particles;
     for (double i = 0.0; i < 10; i += 1.0)
         particles.push_back({100+i, 200+i, 300+i, 400+i});
-
-//    for(auto &&p : particles) h5pp::print("x:{:.3f} y:{:.3f} z:{:.3f} a:{:.3f} \n",p.x,p.y,p.z,p.a);
 
     file.writeDataset(particles, "particles", H5_PARTICLE_V1);
 }
@@ -97,7 +94,6 @@ void read_v1_as_v2() {
         h5pp::Options options;
         options.linkPath = "particles";
         auto dsetInfo = file.getDatasetInfo("particles");
-        h5pp::print("\n\n\n\n **dsetInfo {} \n", dsetInfo.string());
         dsetInfo.h5Type = H5_PARTICLE_V2;    
         file.readDataset(particles, dsetInfo, options);
     }
